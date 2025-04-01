@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>firstChild и lastChild</title>
+
+</head>
+
+<body>
+	<ul class="my-list">
+		<li>First</li>
+		<li>Second</li>
+		<li>Third</li>
+	</ul>
+</body>
+<button id="change-color" data-color="#e6e6e6">Change color</button>
+<script>
+	const body = document.body;
+	const button = document.getElementById("change-color");
+	const colors = ['red', 'blue', 'green', 'orange'];
+	let intervalId = null; // Для хранения ID интервала
+
+	function changeColor() {
+		const randomColor = colors[Math.floor(Math.random() * colors.length)];
+		body.style.backgroundColor = randomColor;
+	}
+
+	button.addEventListener("click", () => {
+		// Если интервал уже запущен - останавливаем
+		if (intervalId) {
+			clearInterval(intervalId);
+			intervalId = null;
+			button.textContent = "Start Color Change";
+		}
+		// Если интервал не запущен - запускаем
+		else {
+			changeColor(); // Сразу меняем цвет при первом нажатии
+			intervalId = setInterval(changeColor, 2000);
+			button.textContent = "Stop Color Change";
+		}
+	});
+</script>
+
+</html>
